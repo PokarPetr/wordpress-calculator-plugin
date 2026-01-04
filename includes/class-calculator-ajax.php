@@ -30,6 +30,10 @@ class Calculator_Ajax {
             $result = 'Unknown operation';
     }
 
+    if (is_numeric($result)) {
+        $result = round($result, 4);
+    }
+
     wp_send_json_success([
         'result' => $result,
     ]);
