@@ -1,10 +1,26 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Init {
+final class Init {
 
-    public function __construct() {
+    private static ?Init $instance = null;
+
+    public static function instance(): Init {
+        if ( self::$instance === null ) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    private function __construct() {
         $this->register_services();
+    }
+
+    private function __clone() {}
+
+    public function __wakeup() {
+        throw new \Exception('Cannot unserialize singleton');
     }
 
     private function register_services() {
