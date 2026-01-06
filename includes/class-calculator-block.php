@@ -2,9 +2,12 @@
 
 class Calculator_Block {
 
+    private string $mode = 'rest';
+
     public function __construct() {
         add_action('init', [$this, 'register']);
-        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
+        if ($this->mode === 'rest') add_action('rest_api_init', [$this, 'rest_register']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
     }
 
     public function register() {
@@ -28,8 +31,6 @@ class Calculator_Block {
         ]);
     }
 
-
-
     public function render($attributes) {
         ob_start();
 
@@ -38,22 +39,59 @@ class Calculator_Block {
         return ob_get_clean();
     }
 
-    public function enqueue() {
+    public function rest_register() {      
+
+         foreach (glob(plugin_dir_path(__DIR__) . 'includes/rest/*.php') as $file) {
+            require_once $file;
+            
+            $class_name = pathinfo($file, PATHINFO_FILENAME);
+            $class_name = str_replace('class-', '', $class_name);
+            $class_name = str_replace('-', '_', $class_name);
+
+            if (class_exists($class_name)) {
+                new $class_name();
+            }
+        }
+
+    }
+
+    public function enqueue_assets() {
+
+        $file = $this->mode === 'ajax' ? 'calc-front-ajax.js' : 'calc-front.js';
+        $handle = 'calculator-front';
         wp_enqueue_script(
-        'calculator-front-js',
-        plugins_url('../assets/js/calc-front.js', __FILE__),
+        $handle,
+        plugins_url('../assets/js/' . $file, __FILE__),
         [],
         false,
         true        
         );
 
-        wp_localize_script(
-        'calculator-front-js',
-        'CalculatorAjax',
-        [
-            'ajax_url' => admin_url( 'admin-ajax.php' ),
-            'nonce'    => wp_create_nonce( 'calculator_nonce' ),
-        ]
+        wp_enqueue_style(
+            $handle,
+            plugins_url( '../assets/css/calc.css', __FILE__ ),
+            [],
+            null
+        );
+
+        $object_name = 'CalculatorRest';
+        $url_name = 'rest_url';
+        $url = esc_url(rest_url('calculator/v1/calc'));
+        $nonce_name = 'wp_rest';
+
+        if ($this->mode === 'ajax') {
+            $object_name = 'CalculatorAjax';
+            $url_name = 'ajax_url';
+            $url = admin_url( 'admin-ajax.php' );
+            $nonce_name = 'ajax_nonce';
+        }        
+        wp_localize_script(            
+            $handle,
+            $object_name,
+            [
+                $url_name => $url,
+                'nonce'   => wp_create_nonce( $nonce_name ),
+            ]
         );
     }
 }

@@ -7,7 +7,7 @@ class Calculator_Ajax {
     }
 
     public function handle() {
-    check_ajax_referer('calculator_nonce', 'nonce');
+    check_ajax_referer('ajax_nonce', 'nonce');
 
     $num1 = isset($_POST['num1']) ? floatval($_POST['num1']) : 0;
     $num2 = isset($_POST['num2']) ? floatval($_POST['num2']) : 0;

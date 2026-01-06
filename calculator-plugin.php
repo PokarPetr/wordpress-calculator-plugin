@@ -8,8 +8,6 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';
-
 spl_autoload_register(function ($class_name) {
     $class_name = strtolower( str_replace( '_', '-', $class_name ) );
 

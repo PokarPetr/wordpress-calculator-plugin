@@ -3,9 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 final class Init {
 
-    private static ?Init $instance = null;
+    private static $instance = null;
 
-    public static function instance(): Init {
+    public static function instance() {
         if ( self::$instance === null ) {
             self::$instance = new self();
         }
@@ -27,6 +27,7 @@ final class Init {
         $services = [
             Calculator_Block::class,
             Calculator_Ajax::class,
+            Calculator_Handler::class,
         ];
 
         foreach ( $services as $service ) {
