@@ -32,6 +32,16 @@ class Calculator_Handler {
                 }
                 $result = $num1 / $num2;
                 break;
+            
+            case 'power':
+                if ($num1 == 0 && $num2 < 0) {
+                    return ['error' => 'Cannot raise zero to a negative power'];
+                }
+                if (abs($num1 ** $num2) > PHP_FLOAT_MAX) {
+                    return ['error' => 'Result too large'];
+                }
+                $result = $num1 ** $num2;
+                break;
 
             default:
                 return [

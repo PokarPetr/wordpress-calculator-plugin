@@ -8,6 +8,7 @@
         <option value="subtract">-</option>
         <option value="multiply">*</option>
         <option value="divide">/</option>
+        <option value="power">¬</option>
     </select>
     <button type="submit">Calculate</button>
     </div>
