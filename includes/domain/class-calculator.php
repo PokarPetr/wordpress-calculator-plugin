@@ -1,15 +1,7 @@
 <?php
 
-class Calculator_Handler {
-    public static function handle($request) {
-      $handler = new self();
-      return $handler->calculate($request);
-    }
-
-    public function calculate($request) {
-        $num1 = (float) $request->get_param('num1');
-        $num2 = (float) $request->get_param('num2');
-        $operation = sanitize_text_field($request->get_param('operation'));
+class Calculator {
+  public function calculate($num1, $num2, $operation) {
 
         switch ($operation) {
             case 'add':
@@ -50,7 +42,7 @@ class Calculator_Handler {
         }
 
         return [
-            'result' => round($result, 4)
+            'result' => round($result, 6)
         ];
     }
 }

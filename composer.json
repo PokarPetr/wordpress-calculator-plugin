@@ -1,0 +1,15 @@
+{
+    "name": "pokarapetr/calculator-plugin",
+    "autoload": {
+        "psr-4": {
+            "Pokarapetr\\CalculatorPlugin\\": "src/"
+        }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpunit/phpunit": "^10.5",
+        "sebastian/diff": "^5.1.1",
+        "yoast/phpunit-polyfills": "^2.0"
+    }
+}

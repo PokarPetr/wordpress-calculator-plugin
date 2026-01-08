@@ -5,7 +5,7 @@ calculators.forEach(block => {
   const resultDiv = block.querySelector('.calc-result');
   const resetBtn = block.querySelector('.calc-reset');
   const useResultBtn = block.querySelector('.calc-use-result');
-
+  
   if (form) {
     const input1 = form.querySelector('input[name="num1"]');
     const input2 = form.querySelector('input[name="num2"]');
@@ -14,14 +14,7 @@ calculators.forEach(block => {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      console.log('REST request body:', {
-          num1: input1.value,
-          num2: input2.value,
-          operation: operation.value,
-          CalculatorRestNonce: CalculatorRest.nonce
-        })
-
-      fetch('/wp-json/calculator/v1/calc', {
+      fetch(CalculatorRest.rest_url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +31,6 @@ calculators.forEach(block => {
         return { ok: response.ok, data };
       })
       .then(({ ok, data }) => {
-        console.log('REST response:', data);
         if (!ok || data.error) {          
           resultDiv.innerText = data.error || 'Calculation error';
           useResultBtn.style.display = 'none';

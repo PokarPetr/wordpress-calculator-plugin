@@ -26,8 +26,6 @@ final class Init {
     private function register_services() {
         $services = [
             Calculator_Block::class,
-            Calculator_Ajax::class,
-            Calculator_Handler::class,
         ];
 
         foreach ( $services as $service ) {

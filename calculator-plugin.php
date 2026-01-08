@@ -14,12 +14,24 @@ define('CALCULATOR_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('CALCULATOR_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 spl_autoload_register(function ($class_name) {
+    $base = CALCULATOR_PLUGIN_PATH . 'includes/';
+    $paths = [
+        '',
+        'handlers/',
+        'domain/',
+    ];
     $class_name = strtolower( str_replace( '_', '-', $class_name ) );
 
-    $file = CALCULATOR_PLUGIN_PATH . 'includes/class-' . strtolower($class_name) . '.php';
-    if (file_exists($file)) {
-        require_once $file;
+    foreach($paths as $path) {
+
+        $file = $base . $path . 'class-' . strtolower($class_name) . '.php';
+        if (file_exists($file)) {
+            require_once $file;
+            return;
+        }
     }
+
+    
 });
 
 Init::instance();
