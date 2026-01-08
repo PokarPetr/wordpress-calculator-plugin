@@ -7,36 +7,15 @@ class Calculator_Ajax {
     }
 
     public function handle() {
-    check_ajax_referer('ajax_nonce', 'nonce');
 
-    $num1 = isset($_POST['num1']) ? floatval($_POST['num1']) : 0;
-    $num2 = isset($_POST['num2']) ? floatval($_POST['num2']) : 0;
-    $operation = $_POST['operation'] ?? '';
+        check_ajax_referer('ajax_nonce', 'nonce');
 
-    switch ($operation) {
-        case 'add':
-            $result = $num1 + $num2;
-            break;
-        case 'subtract':
-            $result = $num1 - $num2;
-            break;
-        case 'multiply':
-            $result = $num1 * $num2;
-            break;
-        case 'divide':
-            $result = ($num2 != 0) ? $num1 / $num2 : 'Error: division by zero';
-            break;
-        default:
-            $result = 'Unknown operation';
+        $request = new WP_REST_Request('POST');
+        $request->set_body_params($_POST);
+
+        $result = Calculator_Handler::handle($request);
+
+        wp_send_json_success($result);
     }
-
-    if (is_numeric($result)) {
-        $result = round($result, 4);
-    }
-
-    wp_send_json_success([
-        'result' => $result,
-    ]);
-  }
 
 }

@@ -26,10 +26,11 @@ calculators.forEach(block => {
       .then(response => response.json())
       .then(data => {
           if (data.success) {
-              resultDiv.innerText = 'Result: ' + data.data.result;
+              const value = data.data.result  ;
+              resultDiv.innerText = 'Result: ' + value;
               resultDiv.style.display = 'block';
               resetBtn.style.display = 'inline-block';
-              if (!isNaN(data.data.result)) {
+              if (!isNaN(value)) {
                 useResultBtn.style.display = 'inline-block';
               } else {
                 useResultBtn.style.display = 'none'; 
