@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-// require_once __DIR__ . '/../../includes/domain/class-calculator.php';
 
 final class CalculatorTest extends TestCase {
 
