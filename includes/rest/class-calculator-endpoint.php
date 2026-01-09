@@ -17,6 +17,8 @@ class Calculator_Endpoint {
   }
 
   public function rest_handler($request) {
-      return Calculator_Handler::handle($request);
+      $calculator = new Calculator();
+      $calculator_handler = new Calculator_Handler($calculator);
+      return $calculator_handler->handle($request);
   } 
 }

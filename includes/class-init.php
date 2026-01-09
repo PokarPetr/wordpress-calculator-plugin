@@ -24,12 +24,13 @@ final class Init {
     }
 
     private function register_services() {
-        $services = [
-            Calculator_Block::class,
-        ];
 
-        foreach ( $services as $service ) {
-            new $service();
-        }
+        $config = require_once CALCULATOR_PLUGIN_PATH . 'includes/config/services.php';
+
+        if(!empty($config['blocks'])) {
+            foreach($config['blocks'] as $service) {
+              new $service();
+            }
+        }        
     }
 }
