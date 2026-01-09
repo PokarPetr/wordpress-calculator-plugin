@@ -1,9 +1,9 @@
 {
     "name": "pokarapetr/calculator-plugin",
     "autoload": {
-        "psr-4": {
-            "Pokarapetr\\CalculatorPlugin\\": "src/"
-        }
+        "classmap": [
+      "includes/"
+    ]
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^4.0",
