@@ -12,31 +12,32 @@
 
    ## Technologies
 
-      PHP 8.3.27 (server-side calculations)
+   - PHP 8.3.27 (server-side calculations)
 
-      JavaScript ES6+ (AJAX, plain JS)
+   - JavaScript ES6+ (AJAX, plain JS)
 
-      WordPress 6.9
+   - WordPress 6.9
 
    ### Unit Tests
 
-      Unit tests check the calculator logic without loading WordPress.
+   Unit tests check the calculator logic without loading WordPress.
 
    ### Installing dependencies
 
-      ```bash
-      composer install 
+    ```bash
+    composer install 
    
    ## Running tests
    Run all unit tests:
-       ```bash
-           vendor/bin/phpunit
+   
+      ```bash
+      vendor/bin/phpunit
 
    ### Test structure
 
-      tests/bootstrap-unit.php — bootstrap for unit tests (Composer autoload)
+   - tests/bootstrap-unit.php — bootstrap for unit tests (Composer autoload)
 
-      tests/Domain/CalculatorTest.php — tests for the Calculator class
+   - tests/Domain/CalculatorTest.php — tests for the Calculator class
 
 
 
@@ -51,11 +52,11 @@
 
    ## Технологии
 
-   1. PHP 8.3.27 (серверные вычисления)
+   - PHP 8.3.27 (серверные вычисления)
 
-   2. JavaScript ES6+ (AJAX, чистый JS)
+   - JavaScript ES6+ (AJAX, чистый JS)
 
-   3. Wordpress 6.9
+   - Wordpress 6.9
 
    ### Unit-тесты
 
@@ -68,14 +69,15 @@
 
 
    ### Запуск тестов
-      все unit-тесты
-          ```bash
-           vendor/bin/phpunit
+   все unit-тесты
+   
+      ```bash
+      vendor/bin/phpunit
 
    ### Структура тестов
 
-      tests/bootstrap-unit.php — bootstrap для unit-тестов (Composer autoload)
+   - tests/bootstrap-unit.php — bootstrap для unit-тестов (Composer autoload)
 
-      tests/Domain/CalculatorTest.php — тесты для класса Calculator
+   - tests/Domain/CalculatorTest.php — тесты для класса Calculator
 
 
